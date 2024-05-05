@@ -64,7 +64,7 @@ def prediction():
         if not file.startswith("X"):
             return render_template(NOT_A_BIRD, image=spectrogram)
 
-        if result['probability'] > 25:
+        if result['probability'] > 85:
             print(result)
             print(result['bird'])
             bird_type = os.path.splitext(file)[0]
