@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <title>Bird Classification</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static',filename='styles/mainpage1.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static',filename='bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <section id="home">
+            <div class="row justify-content-start" style="padding-top:10px;">
+                <div class="col-lg-6 hidden-sm hidden-xs" style="padding-top:10px;">
+                    <img alt="Responsive image" class="img-responsive" src="static/images/ptak1.png"
+                        style="max-height:961px;max-width:700px;" />
+                </div>
+                <div class="col-lg-6 col-sm-12" style="padding-top:10px;">
+                    <div class="row justify-content-start" style=" width: 100%; padding-top:80px; padding-left: 10px; ">
+                        {% block content %} {% endblock %}
+                    </div>
+                    <div class="row justify-content-center" style="padding-top:10px;">
+                        <div class="col col-sm-12"
+                            style="width: 100%; display: flex;align-items: center;justify-content: center; flex-direction: column">
+                            {% block form%} {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="About" style="padding-top: 0px;">
+            <div class="row justify-content-end">
+                <div class="  col-lg-3 hidden-sm hidden-xs">
+                    <div class="vector">
+                        <svg fill="none" height="595" viewBox="0 0 226 595" width="226"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 595L226 0H65.8425L0 59.263V595Z" fill="#229082" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-sm-12" style="padding-top: 0px;">
+                    <h1 class="right" style="color: #F7DE40;">About the project</h1>
+                    <p class="About" style="font-family: Poppins">The project employs a deep learning approach, specifically leveraging the EfficientNet architecture, which is known for its effectiveness in image classification tasks. The model is trained on a large dataset of bird images, carefully annotated with species labels. By learning from these labeled examples, the model can recognize patterns and features indicative of different bird species.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

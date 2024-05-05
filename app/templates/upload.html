@@ -1,0 +1,84 @@
+{% extends "base.html"%}
+{% block content%}
+
+<label style="padding-top: 15px; text-align: center; justify-content: center;">
+    <p style="font-family: Poppins; font-size: 35px;">Bird Type Classification using <span
+            class="yellow">EfficientNet</span></p>
+    <p style="font-family: Poppins; font-size: 15px;">Upload a WAV file (max 16MB) to discover.</p>
+</label>
+{% endblock %}
+{% block form %}
+<div class="card" style="width: 60%; align-self: center;">
+    <div class="form">
+        <div class="card-body" style="color: black;">
+            <form id="uploadForm" action="/prediction" enctype="multipart/form-data" method="POST"
+                style="margin-top: 5px; display: flex; gap: 10px; flex-direction: column; justify-content: space-around; align-items: center;">
+                <div class="file-name" id="fileName"
+                    style="text-align: center; margin-top: 10px; width: 100%; height: 15%; font-weight: bold;"></div>
+                <label class="btn btn-light" for="exampleFormControlFile1" style="margin-left: 0px;">Choose
+                    file</label>
+                <input class="form-control-file" id="exampleFormControlFile1" name="file"
+                    style="width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; position: absolute; z-index: -1;"
+                    type="file" required>
+                <div class="upload-file" style="display: flex; justify-content: center;">
+                    <input class="btn btn-light"
+                        style="width: 10rem; background-color: #F7DE40; margin-top: 0px; margin-bottom: 0px;"
+                        type="submit" value="Upload">
+                </div>
+            </form>
+            <!-- Additional div to play the uploaded audio -->
+            <div id="audioPlayer" style="margin-top: 20px;">
+                <audio controls id="audioElement" style="width: 100%;">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add a div for displaying unsupported message -->
+<div id="unsupportedMessage" style="display: none;">Your browser does not support the audio element.</div>
+
+<div class="text-center">
+    <div id="spinner" role="status"
+        style="display: none; margin-top: 20px; margin-left: 50%; transform: translateX(-50%);">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<script>
+    document.getElementById('exampleFormControlFile1').addEventListener('change', function (event) {
+        var fileName = event.target.files[0].name;
+        document.getElementById('fileName').textContent = 'Selected file: ' + fileName;
+
+        // Get the selected file
+        var file = event.target.files[0];
+
+        // Create URL for the selected file
+        var fileURL = URL.createObjectURL(file);
+
+        // Update the src attribute of the audio element with the file URL
+        document.getElementById('audioElement').src = fileURL;
+
+        // Show the audio player
+        document.getElementById('audioPlayer').style.display = 'block';
+
+        // Hide unsupported message
+        document.getElementById('unsupportedMessage').style.display = 'none';
+    });
+
+    document.getElementById('uploadForm').addEventListener('submit', function (event) {
+        var fileName = document.getElementById('exampleFormControlFile1').files[0].name;
+        document.getElementById('fileName').textContent = 'Uploading: ' + fileName;
+
+        // Show spinner
+        document.getElementById('spinner').style.display = 'block';
+
+        // Hide spinner after 5 seconds
+        setTimeout(function () {
+            document.getElementById('spinner').style.display = 'none';
+        }, 5000);
+    });
+</script>
+
+{% endblock %}
