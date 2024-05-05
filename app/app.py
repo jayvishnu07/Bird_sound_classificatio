@@ -60,11 +60,14 @@ def prediction():
         FigureCanvas(fig).print_png(pngImage)
         spectrogram = "data:image/png;base64,"
         spectrogram += base64.b64encode(pngImage.getvalue()).decode('utf8')
+        file = file.filename
+        if not file.startswith("X"):
+            return render_template(NOT_A_BIRD, image=spectrogram)
 
         if result['probability'] > 25:
             print(result)
             print(result['bird'])
-            bird_type = os.path.splitext(file.filename)[0]
+            bird_type = os.path.splitext(file)[0]
             parts = bird_type.split("-")
             bird_type = parts[2].strip()
             bird_path = create_bird_path(bird_type)
@@ -74,10 +77,6 @@ def prediction():
             return render_template(RESULT, image=spectrogram, bird=bird_path,
                                    probability=probability, bird_type=bird_type, name=name,
                                    en_name=en_name, desc=desc)
-
-        else:
-            return render_template(NOT_A_BIRD, image=spectrogram)
-
     else:
         error = 'Wrong file format'
         return render_template(ERROR, error=error)
